@@ -72,6 +72,7 @@ public class ExecUtil {
                                 read = in.read(buffer);
                                 if (read > 0) {
                                     out.write(buffer, 0, read);
+                                    out.flush();
                                 }
                             }
                             out.flush();
@@ -80,7 +81,6 @@ public class ExecUtil {
                             exception = exc;
                         } finally {
                             quietlyClose(in);
-                            quietlyClose(out);
                         }
                     }
                 }
@@ -94,7 +94,7 @@ public class ExecUtil {
         }
     }
 
-    public static void quietlyClose(final Writer writer) {
+    public static void quietlyClose(final Writer writer, OutputStream originalStream) {
         try {
             writer.close();
         } catch(IOException ioExc) {

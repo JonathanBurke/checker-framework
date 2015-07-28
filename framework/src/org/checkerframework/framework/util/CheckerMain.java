@@ -94,6 +94,14 @@ public class CheckerMain {
         assertValidState();
     }
 
+    public void addToClasspath(List<String> cpOpts) {
+        this.cpOpts.addAll(cpOpts);
+    }
+
+    public void addToRuntimeBootclasspath(List<String> runtimeBootClasspathOpts) {
+        this.runtimeBootClasspath.addAll(runtimeBootClasspathOpts);
+    }
+
     protected void assertValidState() {
         assertFilesExist(Arrays.asList(javacJar, jdkJar, checkersJar));
     }
@@ -321,10 +329,7 @@ public class CheckerMain {
         args.add("com.sun.tools.javac.Main");
     }
 
-    /**
-     * Invoke the JSR308 Type Annotations Compiler with all relevant jars on it's classpath or boot classpath
-     */
-    protected int invokeCompiler() {
+    public List<String> getExecArguments() {
         List<String> args = new ArrayList<String>(jvmOpts.size() + cpOpts.size() + toolOpts.size() + 5);
 
         final String java = PluginUtil.getJavaCommand(System.getProperty("java.home"), System.out);
@@ -347,6 +352,14 @@ public class CheckerMain {
         }
 
         args.addAll(toolOpts);
+        return args;
+    }
+
+    /**
+     * Invoke the JSR308 Type Annotations Compiler with all relevant jars on it's classpath or boot classpath
+     */
+    public int invokeCompiler() {
+        List<String> args = getExecArguments();
 
         for (int i = 0; i < args.size(); i++) {
             String arg = args.get(i);
