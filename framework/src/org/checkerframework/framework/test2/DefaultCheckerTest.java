@@ -30,7 +30,7 @@ import static org.checkerframework.framework.test2.TestConfigurationBuilder.buil
  * the run method.
  */
 @RunWith(TestSuite.class)
-public abstract class OneByOneCheckerTest {
+public abstract class DefaultCheckerTest {
 
     protected final File testFile;
 
@@ -50,9 +50,9 @@ public abstract class OneByOneCheckerTest {
      * @param checkerDir the path to the directory of test inputs
      * @param checkerOptions options to pass to the compiler when running tests
      */
-    public OneByOneCheckerTest(File testFile,
-                               Class<? extends AbstractProcessor> checker,
-                               String checkerDir, String... checkerOptions) {
+    public DefaultCheckerTest(File testFile,
+                              Class<? extends AbstractProcessor> checker,
+                              String checkerDir, String... checkerOptions) {
         this.testFile = testFile;
         this.checkerName = checker.getName();
         this.checkerDir = "tests" + File.separator + checkerDir;
