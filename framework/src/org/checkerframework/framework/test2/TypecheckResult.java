@@ -110,7 +110,7 @@ public class TypecheckResult {
                 summaryBuilder.append(
                     unexpectedDiagnostics.size() == 1
                             ? "1 unexpected diagnostic was found:\n"
-                            : missingDiagnostics.size() + " unexpected diagnostics were found:\n"
+                            : unexpectedDiagnostics.size() + " unexpected diagnostics were found:\n"
                 );
 
                 for (String unexpected : unexpectedDiagnostics) {
